@@ -1,8 +1,6 @@
 {
   "name": "my-app",
-  "homepage": "https://Milak66.github.io/PlansForToday",
   "version": "0.1.0",
-  "homepage": "https://Milak66.github.io/PlansForToday",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
