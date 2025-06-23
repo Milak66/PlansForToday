@@ -151,6 +151,35 @@ const App: React.FC<AppProps> = () => {
         }
     };
 
+    const showInput = () => {
+        if (!isMainOpen) {
+            return (
+                <input
+                className="setPlan"
+                type="text"
+                placeholder="What needs to be done?"
+                onClick={onOpenMain}
+                onChange={onChangeTextOfTask}
+                value={textOfTask}
+                onKeyDown={handleKeyDown}
+                disabled={isLimitReached}
+            />
+            )
+        } else {
+            return (
+                <input
+                className="setPlan"
+                type="text"
+                placeholder="What needs to be done?"
+                onChange={onChangeTextOfTask}
+                value={textOfTask}
+                onKeyDown={handleKeyDown}
+                disabled={isLimitReached}
+            />
+            )
+        }
+    }
+
     return (
         <div className="app">
             <div className="todosText">todos</div>
@@ -158,15 +187,7 @@ const App: React.FC<AppProps> = () => {
                 <div>
                     {onGetKindArrow()}
                 </div>
-                <input
-                    className="setPlan"
-                    type="text"
-                    placeholder="What needs to be done?"
-                    onChange={onChangeTextOfTask}
-                    value={textOfTask}
-                    onKeyDown={handleKeyDown}
-                    disabled={isLimitReached}
-                />
+                {showInput()}
             </div>
 
             <div className="main" style={{ display: isMainOpen ? 'block' : 'none' }}>
