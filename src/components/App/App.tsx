@@ -12,22 +12,22 @@ const TaskOfDay: React.FC<TaskOfDayProps> = (props) => {
     const { nameOfTask, id, onTaskComplete, isCompleted } = props;
 
     return (
-        <div className="taskOfDay">
-            <div onClick={() => onTaskComplete(id)} style={{cursor: 'pointer'}}>
-                {isCompleted ? (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="12" cy="12" r="10" fill="#64BC69"/>
+        <div className="taskPlace" onClick={() => onTaskComplete(id)} style={{cursor: 'pointer'}}>
+        {isCompleted ? (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" fill="#64BC69"/>
                         <path d="M6 12.75L10 16.75L18 8.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                ) : (
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            ) : (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                    </svg>
-                )}
-            </div>
+             </svg>
+        )}
+        <div className="taskOfDay">
             <div className={`task ${isCompleted ? 'completed' : ''}`}>
                 {nameOfTask}
             </div>
+        </div>
         </div>
     );
 };
@@ -41,57 +41,36 @@ interface AllTasksOfDayProps {
 interface AppProps { }
 
 const App: React.FC<AppProps> = () => {
-    const [isMainOpen, setIsMainOpen] = React.useState<boolean>(false);
     const [textOfTask, setTextOfTask] = React.useState<string>('');
     const [allTasksOfDay, setAllTasksOfDay] = React.useState<AllTasksOfDayProps[]>([]);
     const [isLimitReached, setIsLimitReached] = React.useState<boolean>(false);
     const [filter, setFilter] = React.useState<'all' | 'active' | 'completed'>('all');
 
-    const onOpenMain = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (event.target === event.currentTarget) {
-            setIsMainOpen(!isMainOpen);
-        }
-    };
-
-    const onGetKindArrow = () => {
-        if (isMainOpen) {
-            return (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            )
-        }
-        else {
-            return (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 14L12 9L17 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            )
-        }
-    }
+    const screenWidth = window.innerHeight;
 
     const onChangeTextOfTask = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
-    
-        if (value.length > 30) {
-            alert('The length of the string should not exceed 50 characters.');
+
+        if (screenWidth > 768) {
+            if (value.length > 100) {
+                alert('Длина строки должна быть не больше 100 символов');
+            } else {
+                setTextOfTask(value);
+            }
         } else {
-            setTextOfTask(value);
+            if (value.length > 50) {
+                alert('Длина строки должна быть не больше 50 символов');
+            } else {
+                setTextOfTask(value);
+            }
         }
     };
 
     const onAddTask = () => {
-        if (allTasksOfDay.length >= 4) {
-            setIsLimitReached(true);
-            alert('A maximum of 4 tasks can be placed!')
-            return;
-        }
-        if (textOfTask.trim() !== '') {
-            const newTask: AllTasksOfDayProps = { taskName: textOfTask, id: Date.now(), isCompleted: false };
-            setAllTasksOfDay([...allTasksOfDay, newTask]);
-            setTextOfTask('');
-            setIsLimitReached(false);
-        };
+        const newTask: AllTasksOfDayProps = { taskName: textOfTask, id: Date.now(), isCompleted: false };
+        setAllTasksOfDay([...allTasksOfDay, newTask]);
+        setTextOfTask('');
+        setIsLimitReached(false);
     };
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -130,13 +109,13 @@ const App: React.FC<AppProps> = () => {
     const showTask = (): React.ReactNode => {
         const filteredTasks = filterTasks();
 
-        if (filteredTasks.length === 0) {
+        if (filteredTasks.length == 0) {
             return (
                 <div className="noTaskYetMessage">Нет заданий</div>
             );
         } else {
             return (
-                <div>
+                <div className="allTasks">
                     {filteredTasks.map((item) => (
                         <TaskOfDay
                             key={item.id}
@@ -151,52 +130,32 @@ const App: React.FC<AppProps> = () => {
         }
     };
 
-    const showInput = () => {
-        if (!isMainOpen) {
-            return (
-                <input
-                className="setPlan"
-                type="text"
-                placeholder="What needs to be done?"
-                onClick={onOpenMain}
-                onChange={onChangeTextOfTask}
-                value={textOfTask}
-                onKeyDown={handleKeyDown}
-                disabled={isLimitReached}
-            />
-            )
-        } else {
-            return (
-                <input
-                className="setPlan"
-                type="text"
-                placeholder="What needs to be done?"
-                onChange={onChangeTextOfTask}
-                value={textOfTask}
-                onKeyDown={handleKeyDown}
-                disabled={isLimitReached}
-            />
-            )
-        }
-    }
-
     return (
         <div className="app">
-            <div className="todosText">todos</div>
-            <div className="headOfMain" onClick={onOpenMain}>
-                <div>
-                    {onGetKindArrow()}
-                </div>
-                {showInput()}
+            <header className="head">
+            <div className="todosText">Задания на день</div>
+            <div className="headOfMain">
+            <input
+                className="setPlan"
+                type="text"
+                placeholder="Введите задание..."
+                onChange={onChangeTextOfTask}
+                value={textOfTask}
+                onKeyDown={handleKeyDown}
+                disabled={isLimitReached}
+            />
             </div>
-
-            <div className="main" style={{ display: isMainOpen ? 'block' : 'none' }}>
+            </header>
+            <main className="mainContent">
+            <div className="main">
                 {showTask()}
-                {isLimitReached && <div className="limitReachedMessage">Превышен лимит задач!</div>}
+            </div>
+            </main>
+            <footer className="footer">
                 <div className="menuOfFilter">
                     <div className="numberOfCases">
                         <div>{allTasksOfDay.filter(task => !task.isCompleted).length}</div>
-                        <div style={{ marginLeft: '5px' }}>items left</div>
+                        <div style={{ marginLeft: '5px' }}>Заданий осталось</div>
                     </div>
 
                     <div className="mainFilter">
@@ -204,27 +163,27 @@ const App: React.FC<AppProps> = () => {
                             className={`filter-item ${filter === 'all' ? 'activeFilter' : ''}`}
                             onClick={() => handleFilterChange('all')}
                         >
-                            All
+                            Все
                         </div>
                         <div
                             className={`filter-item ${filter === 'active' ? 'activeFilter' : ''}`}
                             onClick={() => handleFilterChange('active')}
                         >
-                            Active
+                            Невыполненные
                         </div>
                         <div
                             className={`filter-item ${filter === 'completed' ? 'activeFilter' : ''}`}
                             onClick={() => handleFilterChange('completed')}
                         >
-                            Completed
+                            Выполненные
                         </div>
                     </div>
 
                     <div className="filterClear">
-                        <div onClick={() => setAllTasksOfDay(allTasksOfDay.filter(task => !task.isCompleted))}>Clear completed</div>
+                        <div onClick={() => setAllTasksOfDay(allTasksOfDay.filter(task => !task.isCompleted))}>Удалить выполненые</div>
                     </div>
                 </div>
-            </div>
+            </footer>
         </div>
     );
 };
