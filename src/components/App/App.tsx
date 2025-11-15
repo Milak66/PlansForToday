@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import './App.css';
 
 interface TaskOfDayProps {
@@ -42,7 +42,10 @@ interface AppProps { }
 
 const App: React.FC<AppProps> = () => {
     const [textOfTask, setTextOfTask] = React.useState<string>('');
-    const [allTasksOfDay, setAllTasksOfDay] = React.useState<AllTasksOfDayProps[]>([]);
+    const [allTasksOfDay, setAllTasksOfDay] = React.useState<AllTasksOfDayProps[]>(() => {
+        const storedTasks = localStorage.getItem('tasks');
+        return storedTasks ? JSON.parse(storedTasks) : [];
+    });
     const [isLimitReached, setIsLimitReached] = React.useState<boolean>(false);
     const [filter, setFilter] = React.useState<'all' | 'active' | 'completed'>('all');
 
@@ -67,8 +70,11 @@ const App: React.FC<AppProps> = () => {
     };
 
     const onAddTask = () => {
+        if (textOfTask.trim() === '') return;
         const newTask: AllTasksOfDayProps = { taskName: textOfTask, id: Date.now(), isCompleted: false };
-        setAllTasksOfDay([...allTasksOfDay, newTask]);
+        const updatedTasks = [...allTasksOfDay, newTask];
+        setAllTasksOfDay(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
         setTextOfTask('');
         setIsLimitReached(false);
     };
@@ -80,15 +86,17 @@ const App: React.FC<AppProps> = () => {
     };
 
     const handleTaskComplete = (id: number) => {
-        setAllTasksOfDay(
-            allTasksOfDay.map((task) =>
-                task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
-            )
+        const updatedTasks = allTasksOfDay.map((task) =>
+            task.id === id ? { ...task, isCompleted: !task.isCompleted } : task
         );
+        setAllTasksOfDay(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     };
 
     const handleRemoveTask = (id: number) => {
-        setAllTasksOfDay(allTasksOfDay.filter((task) => task.id !== id));
+        const updatedTasks = allTasksOfDay.filter((task) => task.id !== id);
+        setAllTasksOfDay(updatedTasks);
+        localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     };
 
     const handleFilterChange = (newFilter: 'all' | 'active' | 'completed') => {
@@ -109,7 +117,7 @@ const App: React.FC<AppProps> = () => {
     const showTask = (): React.ReactNode => {
         const filteredTasks = filterTasks();
 
-        if (filteredTasks.length == 0) {
+        if (filteredTasks.length === 0) {
             return (
                 <div className="noTaskYetMessage">Нет заданий</div>
             );
@@ -180,7 +188,11 @@ const App: React.FC<AppProps> = () => {
                     </div>
 
                     <div className="filterClear">
-                        <div onClick={() => setAllTasksOfDay(allTasksOfDay.filter(task => !task.isCompleted))}>Удалить выполненые</div>
+                        <div onClick={() => {
+                            const remainingTasks = allTasksOfDay.filter(task => !task.isCompleted);
+                            setAllTasksOfDay(remainingTasks);
+                            localStorage.setItem('tasks', JSON.stringify(remainingTasks));
+                        }}>Удалить выполненые</div>
                     </div>
                 </div>
             </footer>
