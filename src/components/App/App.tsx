@@ -49,7 +49,7 @@ const App: React.FC<AppProps> = () => {
     const [isLimitReached, setIsLimitReached] = React.useState<boolean>(false);
     const [filter, setFilter] = React.useState<'all' | 'active' | 'completed'>('all');
 
-    const screenWidth = window.innerHeight;
+    const screenWidth = window.innerWidth;
 
     const onChangeTextOfTask = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -134,6 +134,7 @@ const App: React.FC<AppProps> = () => {
 
     return (
         <div className="app">
+            <div className="allTaskInfo">Заданий осталось: {allTasksOfDay.filter(task => !task.isCompleted).length}</div>
             <header className="head">
             <div className="todosText">Plans for today</div>
             <div className="headOfMain">
@@ -155,10 +156,6 @@ const App: React.FC<AppProps> = () => {
             </main>
             <footer className="footer">
                 <div className="menuOfFilter">
-                    <div className="numberOfCases">
-                        <div>{allTasksOfDay.filter(task => !task.isCompleted).length}</div>
-                        <div style={{ marginLeft: '5px' }}>Заданий осталось</div>
-                    </div>
 
                     <div className="mainFilter">
                         <div

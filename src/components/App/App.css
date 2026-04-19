@@ -2,26 +2,31 @@
     display: grid;
     grid-template-rows: 20vh 1fr 8vh;
     height: 100vh;
-    background-image: url(../../../public/1616990082_11-p-fon-.jpeg);
+    background-image: url(../../../public/697b00d2b6bcf68cbb94f9da415dec98.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    font-family: Gill Sans, sans-serif;
 }
 
 .head {
-    width: 100%;
-    margin-top: 1vw;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
-.mainContent {
-    width: 100%;
-}
-
-.footer {
-    width: 100%;
+.allTaskInfo {
+    width: 10vw;
+    height: 5vw;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    font-size: 1.5vw;
+    right: 1vw;
+    color: white;
+    position: absolute;
+    background-color: rgb(150, 0, 150);
+    border-radius: 1vw;
 }
 
 .todosText {
@@ -30,30 +35,24 @@
 }
 
 .headOfMain {
-    width: 60vw;
+    width: 80vw;
     display: flex;
     align-items: center;
     height: 10vh;
-    margin-top: 1vw;
 }
 
 .setPlan {
     font-size: 2vw;
     height: 7vh;
     border-radius: 2vw;
-    width: 100vw;
-}
-
-.main {
-    width: 100vw;
-    height: 60vh;
+    width: 100%;
 }
 
 .noTaskYetMessage {
-    font-size: 50px;
+    font-size: 3vw;
     display: flex;
     justify-content: center;
-    height: 100%;
+    height: 60vh;
     align-items: center;
     color: rgb(174, 174, 174);
 }
@@ -63,7 +62,6 @@
     display: flex;
     justify-content: space-between;
     height: 10vh;
-    margin-top: 1vw;
     align-items: center;
 }
 
@@ -87,74 +85,107 @@
     color: #888;
 }
 
-.menuOfFilter {
-    width: 100%;
+.footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    width: 100%;
 }
 
-.numberOfCases {
-    width: 20%;
+.menuOfFilter {
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vw;
+}
+
+.mainFilter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    width: auto;
+}
+
+.filter-item {
+    cursor: pointer;
+    font-size: 1.2vw;
+    padding: 0.4vw 0.8vw;
+    border-radius: 0.5vw;
+    transition: 0.2s;
+}
+
+.filter-item:hover {
+    background-color: rgba(150, 0, 150, 0.1);
+}
+
+.activeFilter {
+    border: 1px solid rgb(150, 0, 150);
+    background-color: rgba(150, 0, 150, 0.1);
+}
+
+.filterClear {
+    width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.mainFilter {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.filter-item {
+.filterClear div {
     cursor: pointer;
-    padding-bottom: 5px;
-    font-size: 1.2vw;
+    font-size: 1.1vw;
+    padding: 0.4vw 0.8vw;
+    border-radius: 0.5vw;
+    transition: 0.2s;
 }
 
-.filterClear {
-    width: 20%;
-    display: flex;
-    align-items: center;
+.filterClear div:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: red;
 }
 
 .allTasks {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 66vh;
-    overflow-y: auto; 
+    margin-top: 1vw;
+    height: 68vh;
+    gap: 2vw;
+    overflow-y: auto;
     box-sizing: border-box;
 }
 
-.activeFilter {
-    border-radius: 0.5vw;
-    padding: 0.3vw;
-    border: 1px solid rgb(150, 0, 150);
-}
-
 @media all and (max-width: 768px) {
+
     .app {
         display: grid;
-        grid-template-rows: 15vh 1fr 8vh;
+        grid-template-rows: 18vh 1fr auto;
         height: 100vh;
     }
-    
+
     .head {
         width: 100%;
-        margin-top: 3vw;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
     }
-    
+
+    .allTaskInfo {
+        width: 20vw;
+        height: 10vw;
+        font-size: 3.5vw;
+        right: 1vw;
+        border-radius: 2vw;
+    }
+
     .todosText {
         font-size: 5vw;
         color: rgb(150, 0, 150);
     }
-    
+
     .headOfMain {
         width: 90%;
         display: flex;
@@ -162,19 +193,19 @@
         height: 10vh;
         margin-top: 2vw;
     }
-    
+
     .setPlan {
         font-size: 3vw;
         height: 5vh;
         border-radius: 5vw;
         width: 100%;
     }
-    
+
     .main {
         width: 100%;
         height: 60vh;
     }
-    
+
     .noTaskYetMessage {
         font-size: 8vw;
         display: flex;
@@ -183,7 +214,7 @@
         align-items: center;
         color: rgb(174, 174, 174);
     }
-    
+
     .taskPlace {
         width: 95%;
         display: flex;
@@ -192,7 +223,7 @@
         margin-top: 3vw;
         align-items: center;
     }
-    
+
     .taskOfDay {
         display: flex;
         width: 93%;
@@ -202,58 +233,58 @@
         border-radius: 5vw;
         background-color: white;
     }
-    
+
     .task {
         font-size: 4vw;
         margin-left: 1vw;
     }
-    
-    .menuOfFilter {
-        width: 100%;
+
+    .footer {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
+        align-items: center;
+        padding: 2vw 0;
+        height: auto; 
     }
-    
-    .numberOfCases {
-        width: 20%;
+
+    .menuOfFilter {
+        width: 95%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 2vw;
     }
-    
+
     .mainFilter {
         width: 100%;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
+        align-items: center;
+        gap: 3vw;
+        flex-wrap: wrap;
+    }
+
+    .filter-item {
+        font-size: 3vw;
+        padding: 1vw 2vw;
+        white-space: nowrap;
+    }
+
+    .filterClear {
+        width: 100%;
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
-    
-    .filter-item {
-        cursor: pointer;
-        padding-bottom: 5px;
+
+    .filterClear div {
         font-size: 3vw;
     }
-    
-    .filterClear {
-        width: 20%;
-        display: flex;
-        text-align: center;
-        align-items: center;
-    }
-    
+
     .allTasks {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 66vh;
-        overflow-y: auto; 
-        box-sizing: border-box;
-    }
-    
-    .activeFilter {
-        border-radius: 3vw;
-        padding: 0.3vw;
-        border: 1px solid rgb(150, 0, 150);
+        height: 68vh;
+        margin-top: 0;
+        overflow-y: auto;
     }
 }
