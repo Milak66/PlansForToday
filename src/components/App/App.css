@@ -20,6 +20,7 @@
     height: 5vw;
     text-align: center;
     display: flex;
+    justify-content: center;
     align-items: center;
     font-size: 1.5vw;
     right: 1vw;
@@ -61,14 +62,14 @@
     width: 95vw;
     display: flex;
     justify-content: space-between;
-    height: 10vh;
     align-items: center;
 }
 
 .taskOfDay {
     display: flex;
-    width: 97%;
-    height: 8vh;
+    width: 90%;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
     align-items: center;
     border: 1px solid;
     border-radius: 3vw;
@@ -78,11 +79,19 @@
 .task {
     font-size: 1.5vw;
     margin-left: 1vw;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .completed {
     text-decoration: line-through;
     color: #888;
+}
+
+.taskTime {
+    font-size: 1.5vw;
+    white-space: nowrap;
 }
 
 .footer {
@@ -216,18 +225,17 @@
     }
 
     .taskPlace {
-        width: 95%;
+        width: 95vw;
         display: flex;
         justify-content: space-between;
-        height: 6vh;
-        margin-top: 3vw;
         align-items: center;
     }
 
     .taskOfDay {
         display: flex;
-        width: 93%;
-        height: 6vh;
+        width: 85%;
+        padding-top: 3vw;
+        padding-bottom: 3vw;
         align-items: center;
         border: 1px solid;
         border-radius: 5vw;
@@ -236,8 +244,15 @@
 
     .task {
         font-size: 4vw;
-        margin-left: 1vw;
+        margin-left: 2vw;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
     }
+
+    .taskTime {
+        font-size: 3vw;
+    }    
 
     .footer {
         display: flex;
@@ -284,7 +299,7 @@
 
     .allTasks {
         height: 68vh;
-        margin-top: 0;
+        gap: 6vw;
         overflow-y: auto;
     }
 }
