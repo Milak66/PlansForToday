@@ -166,6 +166,66 @@
     box-sizing: border-box;
 }
 
+@media all and (min-width: 769px) and (max-width: 1024px) {
+
+    .app {
+        grid-template-rows: 18vh 1fr 10vh;
+    }
+
+    .allTaskInfo {
+        width: 14vw;
+        height: 7vw;
+        font-size: 2.2vw;
+        border-radius: 2vw;
+    }
+
+    .todosText {
+        font-size: 4vw;
+    }
+
+    .headOfMain {
+        width: 85vw;
+    }
+
+    .setPlan {
+        font-size: 2.5vw;
+        height: 6vh;
+        border-radius: 3vw;
+    }
+
+    .taskOfDay {
+        width: 88%;
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+        border-radius: 4vw;
+    }
+
+    .task {
+        font-size: 2.3vw;
+        margin-left: 2vw;
+    }
+
+    .taskTime {
+        font-size: 2vw;
+    }
+
+    .filter-item {
+        font-size: 2vw;
+        padding: 0.8vw 1.5vw;
+        border-radius: 1vw;
+    }
+
+    .filterClear div {
+        font-size: 2vw;
+        padding: 0.8vw 1.5vw;
+        border-radius: 1vw;
+    }
+
+    .allTasks {
+        gap: 3vw;
+    }
+}
+
 @media all and (max-width: 768px) {
 
     .app {

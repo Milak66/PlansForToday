@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { useState } from 'react';
 
 interface TaskOfDayProps {
     nameOfTask: string;
@@ -56,8 +57,8 @@ interface AllTasksOfDayProps {
 interface AppProps { }
 
 const App: React.FC<AppProps> = () => {
-    const [textOfTask, setTextOfTask] = React.useState<string>('');
-    const [allTasksOfDay, setAllTasksOfDay] = React.useState<AllTasksOfDayProps[]>(() => {
+    const [textOfTask, setTextOfTask] = useState<string>('');
+    const [allTasksOfDay, setAllTasksOfDay] = useState<AllTasksOfDayProps[]>(() => {
         const storedTasks = localStorage.getItem('tasks');
 
         if (!storedTasks) return [];
@@ -72,8 +73,8 @@ const App: React.FC<AppProps> = () => {
         return fixedTasks;
     });
 
-    const [isLimitReached, setIsLimitReached] = React.useState<boolean>(false);
-    const [filter, setFilter] = React.useState<'all' | 'active' | 'completed'>('all');
+    const [isLimitReached, setIsLimitReached] = useState<boolean>(false);
+    const [filter, setFilter] = useState<'all' | 'active' | 'completed'>('all');
 
     const onChangeTextOfTask = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
