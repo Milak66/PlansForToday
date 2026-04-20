@@ -131,8 +131,8 @@ const App: React.FC<AppProps> = () => {
     const showTask = (): React.ReactNode => {
         const filteredTasks = filterTasks();
 
-        if (filteredTasks.length === 0) {
-            return <div className="noTaskYetMessage">Нет заданий</div>;
+        if (filteredTasks.length == 0) {
+            return <div className="noTaskYetMessage">There's nothing yet</div>;
         }
 
         return (
