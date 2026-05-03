@@ -110,6 +110,13 @@
     white-space: nowrap;
 }
 
+.remainTime {
+    font-size: 1.5vw;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
 .footer {
     display: flex;
     justify-content: center;
@@ -267,6 +274,69 @@
 
 @media all and (min-width: 769px) and (max-width: 1024px) {
 
+    .app {
+        grid-template-rows: 18vh 1fr 10vh;
+    }
+
+    .allTaskInfo {
+        width: 14vw;
+        height: 7vw;
+        font-size: 2.2vw;
+        border-radius: 2vw;
+    }
+
+    .todosText {
+        font-size: 4vw;
+    }
+
+    .headOfMain {
+        width: 85vw;
+    }
+
+    .setPlan {
+        font-size: 2.5vw;
+        height: 6vh;
+        border-radius: 3vw;
+    }
+
+    .taskPlace {
+        width: 95vw;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 5vw 80vw 10vw;
+    }
+
+    .taskOfDay {
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+        border-radius: 4vw;
+    }
+
+    .task {
+        font-size: 2.3vw;
+        margin-left: 2vw;
+    }
+
+    .taskTime {
+        font-size: 2vw;
+    }
+
+    .filter-item {
+        font-size: 2vw;
+        padding: 0.8vw 1.5vw;
+        border-radius: 1vw;
+    }
+
+    .filterClear div {
+        font-size: 2vw;
+        padding: 0.8vw 1.5vw;
+        border-radius: 1vw;
+    }
+
+    .allTasks {
+        gap: 3vw;
+    }
+
     .modal {
         max-width: 60vw;
         padding: 3vh 4vw;
@@ -296,109 +366,6 @@
         font-size: 2vw;
         padding: 1.2vw 2vw;
         border-radius: 4vw;
-    }
-}
-
-@media all and (max-width: 768px) {
-
-    .modal {
-        width: 90vw;
-        max-width: none;
-        padding: 4vh 5vw;
-        border-radius: 3vw;
-    }
-
-    .modal h3 {
-        font-size: 5vw;
-    }
-
-    .modal input {
-        width: 100%;
-        font-size: 4vw;
-        padding: 2vh 3vw;
-        border-radius: 2vw;
-    }
-
-    .modalButtons {
-        flex-direction: column;
-        gap: 2vh;
-    }
-
-    .modalButtons button {
-        width: 100%;
-        font-size: 4vw;
-        padding: 2vh;
-        border-radius: 2vw;
-    }
-
-    .plusTime {
-        width: 20vw;
-    }
-
-    .plusTimeBtn {
-        font-size: 3.5vw;
-        padding: 2vw 3vw;
-        border-radius: 6vw;
-    }
-}
-
-@media all and (min-width: 769px) and (max-width: 1024px) {
-
-    .app {
-        grid-template-rows: 18vh 1fr 10vh;
-    }
-
-    .allTaskInfo {
-        width: 14vw;
-        height: 7vw;
-        font-size: 2.2vw;
-        border-radius: 2vw;
-    }
-
-    .todosText {
-        font-size: 4vw;
-    }
-
-    .headOfMain {
-        width: 85vw;
-    }
-
-    .setPlan {
-        font-size: 2.5vw;
-        height: 6vh;
-        border-radius: 3vw;
-    }
-
-    .taskOfDay {
-        width: 88%;
-        padding-top: 2vw;
-        padding-bottom: 2vw;
-        border-radius: 4vw;
-    }
-
-    .task {
-        font-size: 2.3vw;
-        margin-left: 2vw;
-    }
-
-    .taskTime {
-        font-size: 2vw;
-    }
-
-    .filter-item {
-        font-size: 2vw;
-        padding: 0.8vw 1.5vw;
-        border-radius: 1vw;
-    }
-
-    .filterClear div {
-        font-size: 2vw;
-        padding: 0.8vw 1.5vw;
-        border-radius: 1vw;
-    }
-
-    .allTasks {
-        gap: 3vw;
     }
 }
 
@@ -475,20 +442,19 @@
 
     .taskPlace {
         width: 95vw;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
         align-items: center;
+        grid-template-columns: 6vw 80vw 9vw;
     }
 
     .taskOfDay {
         display: flex;
-        width: 85%;
         padding-top: 3vw;
         padding-bottom: 3vw;
+        background-color: white;
         align-items: center;
         border: 1px solid;
         border-radius: 5vw;
-        background-color: white;
     }
 
     .task {
@@ -501,6 +467,10 @@
 
     .taskTime {
         font-size: 3vw;
+    }
+
+    .remainTime {
+        font-size: 2.5vw;
     }
 
     .footer {
@@ -550,5 +520,45 @@
         height: 68vh;
         gap: 6vw;
         overflow-y: auto;
+    }
+
+    .modal {
+        width: 90vw;
+        max-width: none;
+        padding: 4vh 5vw;
+        border-radius: 3vw;
+    }
+
+    .modal h3 {
+        font-size: 5vw;
+    }
+
+    .modal input {
+        width: 100%;
+        font-size: 4vw;
+        padding: 2vh 3vw;
+        border-radius: 2vw;
+    }
+
+    .modalButtons {
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    .modalButtons button {
+        width: 100%;
+        font-size: 4vw;
+        padding: 2vh;
+        border-radius: 2vw;
+    }
+
+    .plusTime {
+        width: 20vw;
+    }
+
+    .plusTimeBtn {
+        font-size: 3.5vw;
+        padding: 2vw 3vw;
+        border-radius: 6vw;
     }
 }

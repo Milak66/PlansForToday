@@ -184,11 +184,10 @@ const App: React.FC<AppProps> = () => {
                             </div>
                         </div>
 
-                        <div className="taskTime">
+           
                             {item.remainTime
-                                ? getRemainingTime(item.remainTime)
-                                : formatTime(item.createdAt)}
-                        </div>
+                                ? <div className="remainTime">{getRemainingTime(item.remainTime)}</div>
+                                : <div className="taskTime">{formatTime(item.createdAt)}</div>}
                     </div>
                 ))}
             </div>
