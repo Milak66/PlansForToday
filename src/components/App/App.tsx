@@ -163,6 +163,7 @@ const App: React.FC<AppProps> = () => {
                         onClick={() => handleTaskComplete(item.id)}
                         style={{ cursor: 'pointer' }}
                     >
+                        <div className='circle'>
                         {item.isCompleted ? (
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <circle cx="12" cy="12" r="10" fill="#64BC69" />
@@ -177,6 +178,7 @@ const App: React.FC<AppProps> = () => {
                                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
                             </svg>
                         )}
+                        </div>
 
                         <div className="taskOfDay">
                             <div className={`task ${item.isCompleted ? 'completed' : ''}`}>

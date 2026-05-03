@@ -80,6 +80,11 @@
     grid-template-columns: 3vw 85vw 8vw;
 }
 
+.circle {
+    display: flex;
+    justify-content: center;
+}
+
 .taskOfDay {
     display: flex;
     padding-top: 1vw;
@@ -441,10 +446,10 @@
     }
 
     .taskPlace {
-        width: 95vw;
+        width: 100vw;
         display: grid;
         align-items: center;
-        grid-template-columns: 6vw 80vw 9vw;
+        grid-template-columns: 10vw 80vw 10vw;
     }
 
     .taskOfDay {
