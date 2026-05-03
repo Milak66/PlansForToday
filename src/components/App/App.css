@@ -36,7 +36,7 @@
 }
 
 .headOfMain {
-    width: 80vw;
+    width: 90vw;
     display: flex;
     align-items: center;
     height: 10vh;
@@ -46,7 +46,22 @@
     font-size: 2vw;
     height: 7vh;
     border-radius: 2vw;
-    width: 100%;
+    width: 80vw;
+}
+
+.plusTime {
+    display: flex;
+    width: 10vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.plusTimeBtn {
+    padding: 1vw;
+    font-size: 1.5vw;
+    border: none;
+    border-radius: 3vw;
+    cursor: pointer;
 }
 
 .noTaskYetMessage {
@@ -60,14 +75,13 @@
 
 .taskPlace {
     width: 95vw;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
     align-items: center;
+    grid-template-columns: 3vw 85vw 8vw;
 }
 
 .taskOfDay {
     display: flex;
-    width: 90%;
     padding-top: 1vw;
     padding-bottom: 1vw;
     align-items: center;
@@ -91,6 +105,8 @@
 
 .taskTime {
     font-size: 1.5vw;
+    display: flex;
+    justify-content: center;
     white-space: nowrap;
 }
 
@@ -164,6 +180,166 @@
     gap: 2vw;
     overflow-y: auto;
     box-sizing: border-box;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(0.4vw);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal {
+    width: 90vw;
+    max-width: 26vw;
+    background: #ffffff;
+    border-radius: 1vw;
+    padding: 2vh 2vw;
+    box-shadow: 0 2vh 6vh rgba(0, 0, 0, 0.3);
+    animation: modalShow 0.2s ease-out;
+}
+
+@keyframes modalShow {
+    from {
+        transform: translateY(2vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal h3 {
+    margin: 0 0 1.5vh 0;
+    font-size: 1.2vw;
+    font-weight: 600;
+}
+
+.modal input {
+    width: 70%;
+    padding: 1vh 1vw;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.8vw;
+    outline: none;
+    font-size: 1vw;
+    margin-bottom: 2vh;
+}
+
+.modal input:focus {
+    border-color: #4a90e2;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1vw;
+}
+
+.modalButtons button {
+    padding: 1vh 1vw;
+    border-radius: 0.8vw;
+    border: none;
+    cursor: pointer;
+    font-size: 1vw;
+}
+
+.modalButtons button:first-child {
+    background: #e5e5e5;
+    color: #333;
+}
+
+.modalButtons button:last-child {
+    background: rgb(150, 0, 150);
+    color: white;
+}
+
+.modalButtons button:hover {
+    opacity: 0.9;
+}
+
+@media all and (min-width: 769px) and (max-width: 1024px) {
+
+    .modal {
+        max-width: 60vw;
+        padding: 3vh 4vw;
+        border-radius: 2vw;
+    }
+
+    .modal h3 {
+        font-size: 2.2vw;
+    }
+
+    .modal input {
+        width: 85%;
+        font-size: 2vw;
+        padding: 1.5vh 2vw;
+    }
+
+    .modalButtons button {
+        font-size: 2vw;
+        padding: 1.5vh 2vw;
+    }
+
+    .plusTime {
+        width: 14vw;
+    }
+
+    .plusTimeBtn {
+        font-size: 2vw;
+        padding: 1.2vw 2vw;
+        border-radius: 4vw;
+    }
+}
+
+@media all and (max-width: 768px) {
+
+    .modal {
+        width: 90vw;
+        max-width: none;
+        padding: 4vh 5vw;
+        border-radius: 3vw;
+    }
+
+    .modal h3 {
+        font-size: 5vw;
+    }
+
+    .modal input {
+        width: 100%;
+        font-size: 4vw;
+        padding: 2vh 3vw;
+        border-radius: 2vw;
+    }
+
+    .modalButtons {
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    .modalButtons button {
+        width: 100%;
+        font-size: 4vw;
+        padding: 2vh;
+        border-radius: 2vw;
+    }
+
+    .plusTime {
+        width: 20vw;
+    }
+
+    .plusTimeBtn {
+        font-size: 3.5vw;
+        padding: 2vw 3vw;
+        border-radius: 6vw;
+    }
 }
 
 @media all and (min-width: 769px) and (max-width: 1024px) {
@@ -256,7 +432,7 @@
     }
 
     .headOfMain {
-        width: 90%;
+        width: 95vw;
         display: flex;
         align-items: center;
         height: 10vh;
@@ -267,7 +443,20 @@
         font-size: 4vw;
         height: 5vh;
         border-radius: 5vw;
-        width: 100%;
+        width: 80vw;
+    }
+
+    .plusTime {
+        display: flex;
+        width: 15vw;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .plusTimeBtn {
+        padding: 2.5vw;
+        font-size: 3vw;
+        border-radius: 6vw;
     }
 
     .main {
@@ -312,14 +501,14 @@
 
     .taskTime {
         font-size: 3vw;
-    }    
+    }
 
     .footer {
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 2vw 0;
-        height: auto; 
+        height: auto;
     }
 
     .menuOfFilter {

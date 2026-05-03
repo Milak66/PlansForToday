@@ -5,6 +5,7 @@ interface Task {
     id: number;
     isCompleted: boolean;
     createdAt: number;
+    remainTime?: number;
 }
 
 type FilterType = 'all' | 'active' | 'completed';
@@ -15,15 +16,19 @@ interface InitialState {
 }
 
 const loadFromLocalStorage = (): Task[] => {
-    const storedTasks = localStorage.getItem('tasks');
-    if (!storedTasks) return [];
+    try {
+        const stored = localStorage.getItem('tasks');
+        if (!stored) return [];
 
-    const parsed = JSON.parse(storedTasks);
+        const parsed = JSON.parse(stored);
 
-    return parsed.map((task: any) => ({
-        ...task,
-        createdAt: task.createdAt || task.id
-    }));
+        return parsed.map((task: any) => ({
+            ...task,
+            createdAt: task.createdAt || task.id
+        }));
+    } catch {
+        return [];
+    }
 };
 
 const initialState: InitialState = {
@@ -31,33 +36,40 @@ const initialState: InitialState = {
     filter: 'all'
 };
 
+const save = (state: Task[]) => {
+    localStorage.setItem('tasks', JSON.stringify(state));
+};
+
 const reducer = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        addTask: (state, action: PayloadAction<string>) => {
-            const newTask: Task = {
-                taskName: action.payload,
+        addTask: (
+            state,
+            action: PayloadAction<{ taskName: string; remainTime?: number }>
+        ) => {
+            state.allTasksOfDay.push({
+                taskName: action.payload.taskName,
                 id: Date.now(),
                 isCompleted: false,
-                createdAt: Date.now()
-            };
+                createdAt: Date.now(),
+                remainTime: action.payload.remainTime
+            });
 
-            state.allTasksOfDay.push(newTask);
-            localStorage.setItem('tasks', JSON.stringify(state.allTasksOfDay));
+            save(state.allTasksOfDay);
         },
 
         toggleTask: (state, action: PayloadAction<number>) => {
             const task = state.allTasksOfDay.find(t => t.id === action.payload);
             if (task) {
                 task.isCompleted = !task.isCompleted;
-                localStorage.setItem('tasks', JSON.stringify(state.allTasksOfDay));
+                save(state.allTasksOfDay);
             }
         },
 
         deleteCompleted: (state) => {
             state.allTasksOfDay = state.allTasksOfDay.filter(t => !t.isCompleted);
-            localStorage.setItem('tasks', JSON.stringify(state.allTasksOfDay));
+            save(state.allTasksOfDay);
         },
 
         setFilter: (state, action: PayloadAction<FilterType>) => {
