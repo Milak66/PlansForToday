@@ -4,56 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../store/store';
 import { addTask, toggleTask, deleteCompleted, setFilter } from '../reducer/reducer';
 
-interface TaskOfDayProps {
-    nameOfTask: string;
-    id: number;
-    onTaskComplete: (id: number) => void;
-    isCompleted: boolean;
-    createdAt: number;
-}
-
-const TaskOfDay: React.FC<TaskOfDayProps> = ({
-    nameOfTask,
-    id,
-    onTaskComplete,
-    isCompleted,
-    createdAt
-}) => {
-    const formatTime = (timestamp?: number) => {
-        if (!timestamp) return '';
-
-        const date = new Date(timestamp);
-        return isNaN(date.getTime())
-            ? ''
-            : date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    };
-
-    return (
-        <div className="taskPlace" onClick={() => onTaskComplete(id)} style={{ cursor: 'pointer' }}>
-            {isCompleted ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" fill="#64BC69" />
-                    <path d="M6 12.75L10 16.75L18 8.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-            ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                </svg>
-            )}
-
-            <div className="taskOfDay">
-                <div className={`task ${isCompleted ? 'completed' : ''}`}>
-                    {nameOfTask}
-                </div>
-            </div>
-
-            <div className="taskTime">
-                {formatTime(createdAt)}
-            </div>
-        </div>
-    );
-};
-
 interface AppProps {}
 
 const App: React.FC<AppProps> = () => {
@@ -63,7 +13,7 @@ const App: React.FC<AppProps> = () => {
     const filter = useSelector((state: any) => state.aleksey.filter);
 
     const [textOfTask, setTextOfTask] = useState<string>('');
-    const [isLimitReached] = useState<boolean>(false); 
+    const [isLimitReached] = useState<boolean>(false);
 
     const onChangeTextOfTask = (event: React.ChangeEvent<HTMLInputElement>) => {
         setTextOfTask(event.target.value);
@@ -101,6 +51,15 @@ const App: React.FC<AppProps> = () => {
         }
     };
 
+    const formatTime = (timestamp?: number) => {
+        if (!timestamp) return '';
+
+        const date = new Date(timestamp);
+        return isNaN(date.getTime())
+            ? ''
+            : date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    };
+
     const showTask = (): React.ReactNode => {
         const filteredTasks = filterTasks();
 
@@ -111,14 +70,39 @@ const App: React.FC<AppProps> = () => {
         return (
             <div className="allTasks">
                 {filteredTasks.map((item: any) => (
-                    <TaskOfDay
+                    <div
                         key={item.id}
-                        nameOfTask={item.taskName}
-                        id={item.id}
-                        onTaskComplete={handleTaskComplete}
-                        isCompleted={item.isCompleted}
-                        createdAt={item.createdAt}
-                    />
+                        className="taskPlace"
+                        onClick={() => handleTaskComplete(item.id)}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        {item.isCompleted ? (
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" fill="#64BC69" />
+                                <path
+                                    d="M6 12.75L10 16.75L18 8.75"
+                                    stroke="white"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                />
+                            </svg>
+                        ) : (
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                            </svg>
+                        )}
+
+                        <div className="taskOfDay">
+                            <div className={`task ${item.isCompleted ? 'completed' : ''}`}>
+                                {item.taskName}
+                            </div>
+                        </div>
+
+                        <div className="taskTime">
+                            {formatTime(item.createdAt)}
+                        </div>
+                    </div>
                 ))}
             </div>
         );
