@@ -54,6 +54,13 @@ const App: React.FC<AppProps> = () => {
         return () => clearInterval(interval);
     }, []);
 
+    const shouldShowNotification = () => {
+        return (
+            document.visibilityState !== 'visible' ||
+            !document.hasFocus()
+        );
+    };
+
     useEffect(() => {
         const interval = setInterval(() => {
             const now = Date.now();
@@ -68,12 +75,18 @@ const App: React.FC<AppProps> = () => {
                 if (shouldFire) {
                     firedTasks.current.add(task.id);
     
-                    if (Notification.permission === 'granted') {
+                    if (
+                        Notification.permission === 'granted' &&
+                        shouldShowNotification()
+                    ) {
                         navigator.serviceWorker.ready.then((registration) => {
-                            registration.showNotification("Time to complete the task has expired!⏰", {
-                                body: task.taskName,
-                                icon: '/icon.png'
-                            });
+                            registration.showNotification(
+                                "Time to complete the task has expired!⏰",
+                                {
+                                    body: task.taskName,
+                                    icon: '/icon.png',
+                                }
+                            );
                         });
                     }
     
