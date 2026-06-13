@@ -70,7 +70,7 @@ const App: React.FC<AppProps> = () => {
     
                     if (Notification.permission === 'granted') {
                         navigator.serviceWorker.ready.then((registration) => {
-                            registration.showNotification('⏰ Task time!', {
+                            registration.showNotification("Time to complete the task has expired!⏰", {
                                 body: task.taskName,
                                 icon: '/icon.png'
                             });
